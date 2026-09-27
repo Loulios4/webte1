@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "MojFont", sans-serif;
+    background-color: #eeeeee;
+    margin: 0;
+    font-size:18px;
+    line-height: 1.6;
+    color: #252536;
+
+}
+
+header {
+    background-color: #333333;
+    color: white;
+    padding: 36px 20px;
+    text-align: center;
+}
+
+main {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+img {
+    width: 300px;
+    max-width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 40px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+p {
+    font-size: 20px;
+}
+
+h2 {
+    color: rgb(29, 29, 115);
+}
+
+p {
+    text-align: center;
+}
+
+img {
+    border-radius: 15px;
+}
+
+section {
+    border: 5px solid black;
+}
+
+@font-face {
+    font-family: "MojFont";
+    src: url("Arimo-VariableFont_wght.ttf") format("truetype");
+}
+
+#kontakt a {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #1d1d73;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+#kontakt a:hover {
+    background-color: #4545a0;
+}
+
+nav {
+    background-color: #20202c;
+    padding: 12px 16px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 10px 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+nav a:hover{
+    background-color: #4848a1;
+    color: white;
+}
+
+img:hover {
+    opacity: 0.8;
+}
