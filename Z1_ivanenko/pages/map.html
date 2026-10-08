@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kde ma nájdete | Denys Ivanenko</title>
+    <meta name="description" content="Na mape ukazujem FEI STU a orientačné bývanie v Bratislave. Pridajte vlastné miesto a zistite jeho vzdušnú vzdialenosť od školy alebo domova.">
+    <meta property="og:title" content="Denys Ivanenko | Kde ma nájdete">
+    <meta property="og:description" content="Moja škola a orientačné bývanie v Bratislave. Porovnajte vzdialenosť vlastného bodu od školy alebo domova.">
+    <meta property="og:image" content="../img/social-card.png">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="../js/script.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
+    <header class="site-header">
+        <div class="container identity">
+            <a class="monogram" href="../index.html" aria-label="Denys Ivanenko — profil">DI</a>
+            <div>
+                <p class="site-name">Denys Ivanenko</p>
+                <p class="tagline">Študent aplikovanej informatiky, zaujímajú ma webové technológie.</p>
+            </div>
+        </div>
+    </header>
+    <nav class="site-nav" aria-label="Hlavná navigácia">
+        <div class="container">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation-list" hidden>
+                <span aria-hidden="true">☰</span> Menu
+            </button>
+            <ul id="navigation-list" class="navigation-list">
+                <li><a href="../index.html"><span class="navigation-number" aria-hidden="true">01</span> Profil</a></li>
+                <li><a href="map.html" aria-current="page"><span class="navigation-number" aria-hidden="true">02</span> Kde ma nájdete</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main id="main-content" class="container" tabindex="-1">
+        <div class="page-intro">
+            <h1>Kde ma nájdete</h1>
+            <p>Študujem na FEI STU. Ako orientačný bod bývania používam ŠD Mladosť; nejde o moju presnú domácu adresu.</p>
+        </div>
+        <noscript><p class="notice">Na zobrazenie interaktívnej mapy, pridávanie bodov a výpočet vzdialeností zapnite JavaScript. Moju školu a orientačný domov nájdete aj v odkazoch pod mapou.</p></noscript>
+        <p id="map-error" class="notice" role="alert" hidden></p>
+        <section class="map-section" aria-labelledby="map-heading">
+            <h2 id="map-heading">Škola, domov a vaše miesta</h2>
+            <p id="map-help">Kliknite na mapu a pomenujte bod vo formulári. Klávesnicou môžete zadať súradnice priamo do polí.</p>
+            <div id="map" role="region" aria-label="Interaktívna mapa Bratislavy" aria-describedby="map-help"></div>
+            <ul class="places-summary">
+                <li><strong>Škola:</strong> <a href="https://www.openstreetmap.org/?mlat=48.151965&amp;mlon=17.072995#map=17/48.151965/17.072995">FEI STU Bratislava</a></li>
+                <li><strong>Domov (orientačne):</strong> <a href="https://www.openstreetmap.org/?mlat=48.159238&amp;mlon=17.064226#map=17/48.159238/17.064226">ŠD Mladosť</a></li>
+            </ul>
+            <p class="small-text">Mapové podklady: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>. Mapová knižnica: <a href="https://leafletjs.com/">Leaflet</a>.</p>
+        </section>
+        <div class="map-controls">
+            <section aria-labelledby="add-heading">
+                <h2 id="add-heading">Pridať miesto</h2>
+                <form id="point-form">
+                    <fieldset id="point-fields" disabled>
+                        <legend class="visually-hidden">Nové miesto na mape</legend>
+                        <label for="point-name">Názov miesta</label>
+                        <input id="point-name" name="point-name" type="text" maxlength="80" placeholder="Napr. moja obľúbená kaviareň" required>
+                        <div class="coordinate-fields">
+                            <div>
+                                <label for="point-latitude">Zemepisná šírka</label>
+                                <input id="point-latitude" name="latitude" type="number" min="-90" max="90" step="any" placeholder="48.155" required>
+                            </div>
+                            <div>
+                                <label for="point-longitude">Zemepisná dĺžka</label>
+                                <input id="point-longitude" name="longitude" type="number" min="-180" max="180" step="any" placeholder="17.070" required>
+                            </div>
+                        </div>
+                        <button class="button" type="submit">Pridať miesto</button>
+                    </fieldset>
+                </form>
+                <p id="point-status" class="small-text" role="status">Súradnice sa doplnia po kliknutí na mapu. Môžete ich zadať aj ručne.</p>
+            </section>
+            <section aria-labelledby="distance-heading">
+                <h2 id="distance-heading">Vzdialenosť</h2>
+                <p id="empty-state">Zatiaľ nemáte žiadne vlastné miesta. Kliknite na mapu, zadajte názov a stlačte „Pridať miesto“.</p>
+                <label for="point-select">Vaše miesto</label>
+                <select id="point-select" disabled>
+                    <option value="">Najprv pridajte miesto</option>
+                </select>
+                <label for="destination-select">Cieľ</label>
+                <select id="destination-select" disabled>
+                    <option value="school">Škola — FEI STU</option>
+                    <option value="home">Domov — ŠD Mladosť</option>
+                </select>
+                <p id="distance-result" class="distance-result" role="status">Po pridaní miesta tu zobrazím vzdialenosť k zvolenému cieľu.</p>
+                <p class="small-text">Počítam vzdušnú vzdialenosť po zemskom povrchu, nie dĺžku cesty pešo alebo autom.</p>
+                <button id="remove-point" class="button button-secondary" type="button" disabled>Odstrániť vybrané miesto</button>
+            </section>
+        </div>
+        <p id="storage-status" class="small-text" role="status">Vaše miesta sa ukladajú v tomto prehliadači a zostanú tu aj po obnovení stránky.</p>
+    </main>
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <address>Kontakt: <a href="https://www.instagram.com/fannydenchick/">@fannydenchick</a></address>
+            <p>© 2026 Denys Ivanenko</p>
+            <p class="source-links">Zdroje: <a href="../img/profile.jpg">profilová fotografia</a> · <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://leafletjs.com/">Leaflet</a></p>
+        </div>
+    </footer>
+</body>
+</html>
