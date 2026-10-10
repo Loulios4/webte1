@@ -1,0 +1,298 @@
+/* Design tokens: every color value lives here */
+:root {
+  --color-brand: #1d6f8a;
+  --color-brand-dark: #12485a;
+  --color-accent: #d9480f;
+  --color-text: #1f2328;
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-shadow: rgb(0 0 0 / 0.18);
+  --radius: 0.5rem;
+  --space: 1rem;
+  --dot-size: 2rem;
+  --panel-width: 16rem;
+  --panel-area: 8rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space);
+}
+
+/* Step 4: the positioned container is the reference for absolute children */
+.hotspot-image {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hotspot-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+}
+
+/* left/top move the top-left corner, translate moves the center onto the point */
+.hotspot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--dot-size);
+  height: var(--dot-size);
+  transform: translate(-50%, -50%);
+}
+
+.hotspot__dot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 3px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  cursor: pointer;
+}
+
+.hotspot__dot:hover {
+  background: var(--color-brand);
+}
+
+.hotspot__dot:focus-visible {
+  outline: 3px solid var(--color-brand-dark);
+  outline-offset: 3px;
+}
+
+/* Step 6: the panel is positioned against its .hotspot (absolute counts as positioned) */
+.hotspot__panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: var(--panel-width);
+  padding: var(--space);
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-brand);
+  border-radius: var(--radius);
+  box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
+}
+
+.hotspot__panel h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  color: var(--color-brand-dark);
+}
+
+.hotspot__panel p {
+  margin: 0;
+}
+
+.hotspot:hover .hotspot__panel,
+.hotspot:focus-within .hotspot__panel {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Step 7: transform creates a stacking context, so lift the whole open hotspot */
+.hotspot:hover,
+.hotspot:focus-within {
+  z-index: 10;
+}
+
+/* Step 8: hotspots in the right half open their panel to the left */
+.hotspot--left .hotspot__panel {
+  left: auto;
+  right: 0;
+}
+
+/*
+ * Step 9: on small screens all panels share one fixed area below the image.
+ * The dot becomes the positioned element instead of .hotspot, so the nearest
+ * positioned ancestor of the panel is the figure, not the hotspot.
+ */
+@media (max-width: 768px) {
+  /* margin, not padding: top in % must stay relative to the image height */
+  .hotspot-image {
+    margin-bottom: calc(var(--panel-area) + var(--space));
+  }
+
+  .hotspot {
+    position: static;
+    width: auto;
+    height: 0;
+    transform: none;
+  }
+
+  .hotspot__dot {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--dot-size);
+    height: var(--dot-size);
+    transform: translate(-50%, -50%);
+  }
+
+  .hotspot-image .hotspot__panel {
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: var(--panel-area);
+    overflow: auto;
+    box-shadow: none;
+  }
+
+  /* Hover wins over focus, so exactly one panel is visible */
+  .hotspot-image:has(.hotspot:hover) .hotspot:not(:hover) .hotspot__panel {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* Nothing selected yet: show the first panel, the area is never empty */
+  .hotspot-image:not(:has(.hotspot:hover, .hotspot:focus-within))
+    .hotspot:first-of-type
+    .hotspot__panel {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Demo controls, not part of the exercise */
+.coordinates {
+  margin-top: var(--space);
+}
+
+.coordinates output {
+  font-family: ui-monospace, monospace;
+  font-weight: bold;
+}
+
+.experiments {
+  display: grid;
+  gap: calc(var(--space) / 2);
+  padding: var(--space);
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.experiments legend {
+  padding: 0 calc(var(--space) / 2);
+  font-weight: bold;
+}
+
+.experiments__note {
+  margin: 0;
+}
+
+.experiments label {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot__panel {
+    transition: none;
+  }
+}
+
+/* Experiments: each class on <body> brings back one mistake from the steps */
+
+/* Step 1: no positioning, hotspots stay in the flow below the image */
+.exp-static .hotspot {
+  position: static;
+  transform: none;
+}
+
+/* Step 2: relative shifts from the original place, which stays reserved */
+.exp-relative .hotspot {
+  position: relative;
+  top: -100px;
+  left: 50px;
+  transform: none;
+}
+
+/* Step 3: no positioned ancestor, hotspots use the initial containing block */
+.exp-no-relative .hotspot-image {
+  position: static;
+}
+
+/* Step 4: fixed pixels do not scale with the image */
+.exp-px .hotspot {
+  left: 200px;
+}
+
+/* Step 5: the top-left corner sits on the point, not the center */
+.exp-no-transform .hotspot {
+  transform: none;
+}
+
+/* Step 5: an inline image leaves a gap below it */
+.exp-inline-img .hotspot-image {
+  outline: 2px dashed var(--color-accent);
+}
+
+.exp-inline-img .hotspot-image img {
+  display: inline;
+}
+
+/* Step 6: a static panel is squeezed into the 2rem wide hotspot */
+.exp-panel-static .hotspot__panel {
+  position: static;
+  width: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Step 6: an invisible panel still catches the mouse */
+.exp-opacity-only .hotspot__panel {
+  visibility: visible;
+}
+
+/* Step 7: z-index on the panel only works inside its own stacking context */
+.exp-panel-z-index .hotspot:hover,
+.exp-panel-z-index .hotspot:focus-within {
+  z-index: auto;
+}
+
+.exp-panel-z-index .hotspot__panel {
+  z-index: 10;
+}
+
+/* Step 8: the panel of a hotspot on the right overflows the image */
+.exp-no-left .hotspot--left .hotspot__panel {
+  left: 0;
+  right: auto;
+}
+
+/* Step 9: padding makes the containing block taller, percentages shift */
+@media (max-width: 768px) {
+  .exp-padding .hotspot-image {
+    margin-bottom: 0;
+    padding-bottom: var(--panel-area);
+  }
+
+  .exp-padding .hotspot-image .hotspot__panel {
+    top: auto;
+    bottom: 0;
+  }
+}

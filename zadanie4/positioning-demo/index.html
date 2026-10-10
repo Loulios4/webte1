@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Z čoho sa skladá bicykel</title>
+  <meta name="description" content="Ukážka umiestnenia aktívnych bodov na obrázku pomocou position: relative a absolute.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main>
+    <h1>Z čoho sa skladá bicykel</h1>
+
+    <figure class="hotspot-image">
+      <img src="img/bike.svg" alt="Ilustrácia bicykla z pravého boku" width="1200" height="800">
+
+      <div class="hotspot" style="--x: 25%; --y: 65%">
+        <button class="hotspot__dot" type="button" aria-label="Monitor"></button>
+        <div class="hotspot__panel">
+          <h2>Monitor</h2>
+          <p>Na monitore si zobrazujem kód, dokumentáciu a náhľad webovej stránky. Väčšia obrazovka mi uľahčuje prácu na školských projektoch.</p>
+        </div>
+      </div>
+
+      <div class="hotspot" style="--x: 27.5%; --y: 75.5%">
+        <button class="hotspot__dot" type="button" aria-label="Notebook"></button>
+        <div class="hotspot__panel">
+          <h2>Notebook</h2>
+          <p>Notebook používam na programovanie, tvorbu webových stránok a prípravu školských zadaní. Môžem na ňom pracovať doma aj na univerzite.</p>
+        </div>
+      </div>
+
+      <div class="hotspot hotspot--left" style="--x: 70%; --y: 23.75%">
+        <button class="hotspot__dot" type="button" aria-label="Klávesnica"></button>
+        <div class="hotspot__panel">
+          <h2>Klávesnica</h2>
+          <p>Klávesnicu používam na písanie kódu, poznámok a školských prác. Klávesové skratky mi pomáhajú rýchlejšie pracovať v editore.</p>
+        </div>
+      </div>
+    </figure>
+
+    <p>Text pod obrázkom, aby bolo vidieť, čo sa deje s obsahom pod ním.</p>
+
+    <p class="coordinates">Kliknite do obrázka a zobrazia sa súradnice bodu: <output id="coordinates">—</output></p>
+
+    <fieldset class="experiments">
+      <legend>Chyby z jednotlivých krokov</legend>
+      <p class="experiments__note">Kroky 1 až 8 skúšajte v okne širšom ako 768 px, krok 9 v užšom. Body vždy aj prejdite myšou.</p>
+      <label><input type="radio" name="experiment" value="" checked> Bez chyby (výsledné riešenie)</label>
+      <label><input type="radio" name="experiment" value="exp-static"> Krok 1: body bez pozíciovania (<code>static</code>)</label>
+      <label><input type="radio" name="experiment" value="exp-relative"> Krok 2: body cez <code>relative; top: -100px; left: 50px</code></label>
+      <label><input type="radio" name="experiment" value="exp-no-relative"> Krok 3: kontajner bez <code>position: relative</code></label>
+      <label><input type="radio" name="experiment" value="exp-px"> Krok 4: body cez <code>left: 200px</code> namiesto percent</label>
+      <label><input type="radio" name="experiment" value="exp-no-transform"> Krok 5: body bez <code>transform</code></label>
+      <label><input type="radio" name="experiment" value="exp-inline-img"> Krok 5: obrázok bez <code>display: block</code></label>
+      <label><input type="radio" name="experiment" value="exp-panel-static"> Krok 6: panel bez <code>position: absolute</code></label>
+      <label><input type="radio" name="experiment" value="exp-opacity-only"> Krok 6: panel skrytý iba cez <code>opacity</code></label>
+      <label><input type="radio" name="experiment" value="exp-panel-z-index"> Krok 7: <code>z-index</code> iba na paneli</label>
+      <label><input type="radio" name="experiment" value="exp-no-left"> Krok 8: bez triedy <code>hotspot--left</code></label>
+      <label><input type="radio" name="experiment" value="exp-padding"> Krok 9 (do 768 px): miesto pod obrázkom cez <code>padding-bottom</code></label>
+    </fieldset>
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>
