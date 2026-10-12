@@ -1,0 +1,97 @@
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    :root {
+        --color-text: #000000;
+        --color-background: #ffffff;
+        --color-brand: #000000;
+        --color-brand-light: #ffffff;
+        --color-accent: #000000;
+    }
+
+    body {
+        display: block;
+        min-height: 0;
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--color-text);
+        background-color: var(--color-background);
+    }
+
+    .site-header,
+    .site-nav,
+    .site-footer,
+    .skip-link {
+        display: none;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    h1 {
+        margin-bottom: 8mm;
+        font-size: 22pt;
+    }
+
+    h2 {
+        margin-bottom: 3mm;
+        font-size: 14pt;
+    }
+
+    p {
+        margin-bottom: 3mm;
+    }
+
+    .page-intro {
+        margin-bottom: 6mm;
+    }
+
+    .cv-layout {
+        grid-template-columns: 60mm 1fr;
+        gap: 8mm;
+        border: 0;
+        border-radius: 0;
+        overflow: visible;
+    }
+
+    .cv-sidebar,
+    .cv-content {
+        padding: 0;
+        color: var(--color-text);
+        background-color: var(--color-background);
+    }
+
+    .cv-photo {
+        width: 32mm;
+        margin-bottom: 5mm;
+    }
+
+    .cv-content section + section {
+        margin-top: 5mm;
+    }
+
+    .cv-content li + li {
+        margin-top: 2mm;
+    }
+
+    .cv-layout section,
+    .cv-sidebar {
+        break-inside: avoid;
+    }
+
+    a,
+    .cv-sidebar a {
+        color: var(--color-text);
+        text-decoration: none;
+    }
+}

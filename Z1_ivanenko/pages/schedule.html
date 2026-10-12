@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kedy ma zastihnete · Denys Ivanenko</title>
+    <meta name="description" content="Môj týždenný rozvrh na FEI STU, časy výučby a priebeh semestra.">
+    <meta property="og:title" content="Denys Ivanenko · Kedy ma zastihnete">
+    <meta property="og:description" content="Môj týždenný rozvrh a priebeh semestra.">
+    <meta property="og:image" content="../img/social-card.png">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/script.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
+    <header class="site-header">
+        <div class="container identity">
+            <a class="monogram" href="../index.html" aria-label="Denys Ivanenko — profil">DI</a>
+            <div>
+                <p class="site-name">Denys Ivanenko</p>
+                <p class="tagline">Študent aplikovanej informatiky.</p>
+            </div>
+        </div>
+    </header>
+    <nav class="site-nav" aria-label="Hlavná navigácia">
+        <div class="container">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation-list" hidden>
+                <span aria-hidden="true">☰</span> Menu
+            </button>
+            <ul id="navigation-list" class="navigation-list">
+                <li><a href="../index.html"><span class="navigation-number" aria-hidden="true">01</span> Profil</a></li>
+                <li><a href="cv.html"><span class="navigation-number" aria-hidden="true">02</span> Životopis</a></li>
+                <li><a href="workspace.html"><span class="navigation-number" aria-hidden="true">03</span> Pracovné prostredie</a></li>
+                <li><a href="schedule.html" aria-current="page"><span class="navigation-number" aria-hidden="true">04</span> Kedy ma zastihnete</a></li>
+                <li><a href="map.html"><span class="navigation-number" aria-hidden="true">05</span> Kde ma nájdete</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main id="main-content" class="container">
+        <div class="page-intro">
+            <h1>Kedy ma zastihnete</h1>
+        </div>
+        <section class="schedule-intro" aria-labelledby="week-heading">
+            <h2 id="week-heading">Môj týždeň</h2>
+            <p>Počas týždňa sa venujem štúdiu na FEI STU. Navštevujem prednášky a cvičenia a pripravujem školské zadania.</p>
+            <p>V rozvrhu si môžete pozrieť, kedy mám výučbu. Na stretnutí sa môžeme dohodnúť cez e-mail alebo Instagram.</p>
+        </section>
+        <section class="schedule-section" aria-labelledby="schedule-heading">
+            <h2 id="schedule-heading">Môj rozvrh</h2>
+            <div id="schedule-filters" class="schedule-filters" role="group" aria-label="Filter rozvrhu" hidden>
+                <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Všetko</button>
+                <button class="filter-button" type="button" data-filter="lecture" aria-pressed="false">Prednášky</button>
+                <button class="filter-button" type="button" data-filter="exercise" aria-pressed="false">Cvičenia</button>
+            </div>
+            <p id="schedule-status" class="notice" role="status" hidden></p>
+            <p id="filter-status" class="notice" role="status" hidden></p>
+            <p id="schedule-help" class="small-text">Rozvrh zobrazuje čas od 7:00 do 21:00.</p>
+            <div id="schedule-scroll" class="schedule-scroll" role="region" aria-label="Týždenný rozvrh, posúvateľná tabuľka" aria-describedby="schedule-help" tabindex="0">
+                <table id="schedule-table" class="schedule-table">
+                    <caption>Týždenný rozvrh</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Deň / čas</th>
+                            <th scope="col">7:00–7:50</th>
+                            <th scope="col">8:00–8:50</th>
+                            <th scope="col">9:00–9:50</th>
+                            <th scope="col">10:00–10:50</th>
+                            <th scope="col">11:00–11:50</th>
+                            <th scope="col">12:00–12:50</th>
+                            <th scope="col">13:00–13:50</th>
+                            <th scope="col">14:00–14:50</th>
+                            <th scope="col">15:00–15:50</th>
+                            <th scope="col">16:00–16:50</th>
+                            <th scope="col">17:00–17:50</th>
+                            <th scope="col">18:00–18:50</th>
+                            <th scope="col">19:00–19:50</th>
+                            <th scope="col">20:00–20:50</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Pondelok</th>
+                            <td colspan="2"></td>
+                            <td class="lesson" colspan="2" data-day="1" data-start="09:00" data-end="10:50" data-type="exercise">
+                                <strong>Webové technológie 1</strong>
+                                <span>c137 · K. Žáková</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td class="lesson" colspan="2" data-day="1" data-start="13:00" data-end="14:50" data-type="exercise">
+                                <strong>Operačné systémy</strong>
+                                <span>cpu-c · M. Jókay</span>
+                            </td>
+                            <td class="lesson" colspan="2" data-day="1" data-start="15:00" data-end="16:50" data-type="lecture">
+                                <strong>Lineárna algebra 2</strong>
+                                <span>cd300 · J. Šiagiová</span>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Utorok</th>
+                            <td colspan="3"></td>
+                            <td class="lesson" colspan="2" data-day="2" data-start="10:00" data-end="11:50" data-type="lecture">
+                                <strong>Webové technológie 1</strong>
+                                <span>cd150 · K. Žáková</span>
+                            </td>
+                            <td></td>
+                            <td class="lesson" colspan="2" data-day="2" data-start="13:00" data-end="14:50" data-type="lecture">
+                                <strong>Matematická štatistika</strong>
+                                <span>bc150 · J. Kalická</span>
+                            </td>
+                            <td class="lesson" colspan="2" data-day="2" data-start="15:00" data-end="16:50" data-type="lecture">
+                                <strong>Softvérové inžinierstvo</strong>
+                                <span>cd300 · O. Gallo</span>
+                            </td>
+                            <td class="lesson" data-day="2" data-start="17:00" data-end="17:50" data-type="exercise">
+                                <strong>Softvérové inžinierstvo</strong>
+                                <span>cd300 · O. Gallo</span>
+                            </td>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Streda</th>
+                            <td></td>
+                            <td class="lesson" colspan="2" data-day="3" data-start="08:00" data-end="09:50" data-type="lecture">
+                                <strong>Operačné systémy</strong>
+                                <span>cd300 · M. Jókay</span>
+                            </td>
+                            <td></td>
+                            <td class="lesson" colspan="2" data-day="3" data-start="11:00" data-end="12:50" data-type="sport">
+                                <strong>Telesná kultúra 5</strong>
+                                <span>tv · J. Lamošová</span>
+                            </td>
+                            <td class="lesson" colspan="2" data-day="3" data-start="13:00" data-end="14:50" data-type="lecture">
+                                <strong>Webové technológie 1</strong>
+                                <span>cd150 · K. Žáková</span>
+                            </td>
+                            <td class="lesson" colspan="2" data-day="3" data-start="15:00" data-end="16:50" data-type="exercise">
+                                <strong>Matematická štatistika</strong>
+                                <span>c430 · D. Pancza</span>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Štvrtok</th>
+                            <td colspan="5"></td>
+                            <td class="lesson" data-day="4" data-start="12:00" data-end="12:50" data-type="exercise">
+                                <strong>Softvérové inžinierstvo</strong>
+                                <span>c137 · O. Gallo</span>
+                            </td>
+                            <td colspan="8"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Piatok</th>
+                            <td colspan="8"></td>
+                            <td class="lesson" colspan="2" data-day="5" data-start="15:00" data-end="16:50" data-type="exercise">
+                                <strong>Lineárna algebra 2</strong>
+                                <span>bc150 · D. Pancza</span>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="schedule-legend" aria-label="Typy hodín">
+                <li class="legend-lecture">Prednáška</li>
+                <li class="legend-exercise">Cvičenie</li>
+                <li class="legend-sport">Telesná kultúra</li>
+            </ul>
+            <noscript><p class="notice">JavaScript je vypnutý. Tabuľka zostáva dostupná, ale filtre, aktuálna hodina a priebeh semestra sa neaktualizujú.</p></noscript>
+        </section>
+        <section class="semester-section" aria-labelledby="semester-heading">
+            <h2 id="semester-heading">Priebeh semestra</h2>
+            <p id="semester-dates">Začiatok: 14. 9. 2026. Koniec: 20. 12. 2026.</p>
+            <label class="visually-hidden" for="semester-progress">Percento uplynutého semestra</label>
+            <progress id="semester-progress" class="semester-progress" max="100" value="0" hidden>0 %</progress>
+            <p id="semester-status" class="small-text" role="status" hidden></p>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <address>Kontakt: <a href="https://www.instagram.com/fannydenchick/" target="_blank">@fannydenchick</a> · <a href="mailto:denis2006ivanenko@gmail.com">denis2006ivanenko@gmail.com</a></address>
+            <p>© 2026</p>
+            <p class="source-links">Zdroje: <a href="../img/profile.jpg">Profilová fotografia</a> · <a href="../img/desktop.png">Vlastná fotografia pracovného stola</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> · <a href="https://leafletjs.com/" target="_blank">Leaflet</a></p>
+        </div>
+    </footer>
+</body>
+</html>
