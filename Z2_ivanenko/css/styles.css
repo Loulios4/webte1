@@ -1,0 +1,607 @@
+/* Písma */
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("../fonts/BodoniModa-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arimo";
+  src: url("../fonts/Arimo-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --ink: #111111;
+  --paper: #ffffff;
+  --line: #c7c7c7;
+  --bs-body-font-family: "Arimo", sans-serif;
+  --bs-body-color: var(--ink);
+  --bs-body-bg: var(--paper);
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.container {
+  width: 92%;
+  max-width: 1320px;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  color: inherit;
+}
+
+:focus-visible,
+.btn:focus-visible,
+.form-check-input:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+  box-shadow: none;
+}
+
+main {
+  padding-bottom: 48px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.notice {
+  margin: 0;
+  padding: 16px 0;
+  font-size: 13px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 16px;
+  z-index: 2000;
+  padding: 12px;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Hlavička */
+
+.site-header {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.header-layout {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-note {
+  grid-column: 3;
+  grid-row: 1;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.brand {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: "Bodoni Moda", serif;
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.header-actions {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding: 10px 16px 10px 0;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-lines {
+  width: 19px;
+  height: 10px;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+
+/* Bočná navigácia */
+
+.navigation-drawer {
+  --bs-offcanvas-width: min(500px, 100vw);
+  --bs-offcanvas-border-width: 1px;
+  --bs-offcanvas-border-color: var(--ink);
+}
+
+.offcanvas-header {
+  justify-content: space-between;
+  gap: 20px;
+  padding: 32px 40px;
+}
+
+.drawer-label {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.close-navigation {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 48px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: 32px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px 48px;
+}
+
+.navigation-list {
+  display: grid;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 12px 16px;
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(32px, 10vw, 40px);
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+}
+
+.navigation-list a:hover,
+.navigation-list a:focus-visible,
+.navigation-list a:active {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.navigation-list a:focus-visible {
+  outline-color: var(--ink);
+}
+
+.navigation-list span {
+  flex: 0 0 26px;
+  font-family: "Arimo", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Úvodný nadpis */
+
+.page-intro {
+  padding: 40px 0 36px;
+}
+
+.page-intro .eyebrow {
+  margin-bottom: 26px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(72px, 9.5vw, 140px);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+
+/* Výber dňa a prevádzok */
+
+.menu-controls {
+  margin-top: 24px;
+  padding: 28px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.menu-controls h2 {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.day-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin-top: 12px;
+}
+
+.day-button {
+  --bs-btn-color: var(--ink);
+  --bs-btn-hover-color: var(--ink);
+  --bs-btn-active-color: var(--paper);
+  --bs-btn-active-bg: var(--ink);
+  --bs-btn-active-border-color: var(--ink);
+  min-width: 100px;
+  min-height: 46px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.day-button:hover {
+  border-color: var(--ink);
+}
+
+.day-button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.restaurant-filters {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.restaurant-filters legend {
+  float: none;
+  width: auto;
+  margin: 0 0 8px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.form-check .form-check-input {
+  float: none;
+  flex-shrink: 0;
+  margin: 0;
+  border-color: var(--ink);
+}
+
+.form-check-input {
+  border-radius: 0 !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--ink);
+  border-color: var(--ink);
+}
+
+.menu-results {
+  margin-top: 42px;
+}
+
+.menu-results > h2 {
+  margin-bottom: 8px;
+  font-family: "Bodoni Moda", serif;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.menu-status {
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.menu-card {
+  height: 100%;
+  border: 0;
+  border-top: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+}
+
+.menu-card .card-body {
+  padding: 24px 10px 30px 0;
+}
+
+.restaurant-heading {
+  display: flex;
+  align-items: start;
+  gap: 14px;
+  min-height: 58px;
+}
+
+.restaurant-number {
+  flex-shrink: 0;
+  padding-top: 3px;
+  font-size: 10px;
+}
+
+.restaurant-heading h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.day-heading {
+  margin: 32px 0 0;
+  font-family: "Bodoni Moda", serif;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.meal-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.meal-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 24px;
+}
+
+.meal-item + .meal-item {
+  margin-top: 24px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.meal-details {
+  min-width: 0;
+}
+
+.meal-type {
+  margin: 0 0 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.meal-name {
+  margin: 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.meal-item-main .meal-name,
+.meal-item-main .meal-type {
+  font-weight: 700;
+}
+
+.meal-price {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.empty-menu {
+  margin: 20px 0 0;
+  font-size: 14px;
+}
+
+/* O projekte a pätička */
+
+.about-section {
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--ink);
+}
+
+.about-section h2 {
+  font-family: "Bodoni Moda", serif;
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.about-section p {
+  font-size: 14px;
+}
+
+.library-note {
+  font-size: 12px !important;
+}
+
+.site-footer {
+  padding: 24px 0;
+  border-top: 1px solid var(--ink);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.footer-content p {
+  margin: 0;
+}
+
+/* Menšie obrazovky */
+
+@media (max-width: 767px) {
+  .site-header {
+    padding: 18px 0;
+  }
+
+  .header-layout {
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .header-note {
+    display: none;
+  }
+
+  .brand {
+    justify-self: end;
+    font-size: 52px;
+    text-align: left;
+  }
+
+  .offcanvas-header {
+    padding: 24px;
+  }
+
+  .offcanvas-body {
+    padding: 28px 24px;
+  }
+
+  .navigation-list a {
+    gap: 16px;
+  }
+
+  .page-intro {
+    padding: 32px 0 28px;
+  }
+
+  h1 {
+    font-size: clamp(66px, 15vw, 110px);
+  }
+
+  .day-buttons {
+    gap: 6px;
+  }
+
+  .day-button {
+    flex: 1 1 calc(33.333% - 6px);
+    min-width: 0;
+    padding: 10px 8px;
+  }
+
+  .filter-options {
+    gap: 0 20px;
+  }
+
+  .menu-results {
+    margin-top: 32px;
+  }
+
+  .menu-results > h2 {
+    font-size: 34px;
+  }
+
+  .menu-card .card-body {
+    padding-right: 0;
+  }
+
+  .restaurant-heading {
+    min-height: 0;
+  }
+
+  .about-section {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 420px) {
+  .day-button {
+    flex-basis: calc(50% - 6px);
+  }
+
+  .filter-options {
+    flex-direction: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
