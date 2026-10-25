@@ -3,10 +3,83 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world!</title>
+    <title>WEBTE1 | Ivanenko Denys</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font-family: Arial, sans-serif;
+        background: #f3f5f8;
+        color: #253047;
+      }
+
+      main {
+        width: 100%;
+        max-width: 420px;
+        padding: 36px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e0e4eb;
+        border-radius: 12px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+      }
+
+      p {
+        margin: 0 0 28px;
+        color: #667085;
+      }
+
+      nav {
+        display: flex;
+        gap: 12px;
+      }
+
+      a {
+        flex: 1;
+        padding: 14px 20px;
+        border-radius: 7px;
+        background: #2c4f84;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      a:hover {
+        background: #203c66;
+      }
+
+      a:focus-visible {
+        outline: 3px solid #7599cc;
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 400px) {
+        nav {
+          flex-direction: column;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello world</h1>
-    <p>Ivanenko Denys — Webové technológie I.</p>
+    <main>
+      <h1>WEBTE1</h1>
+      <p>Ivanenko Denys</p>
+      <nav aria-label="Zadania">
+        <a href="Z1_ivanenko/index.html">Z1</a>
+        <a href="Z2_ivanenko/index.html">Z2</a>
+      </nav>
+    </main>
   </body>
 </html>
