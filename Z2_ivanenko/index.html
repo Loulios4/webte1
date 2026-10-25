@@ -9,26 +9,25 @@
   <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <script src="vendor/bootstrap/bootstrap.min.js" defer></script>
+  <script src="js/parsers.js" defer></script>
   <script src="js/script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
 
   <header class="site-header">
-    <div class="container header-layout">
+    <div class="container">
       <p class="header-note">Obedové menu<br>V okolí FEI STU</p>
       <a class="brand" href="index.html" aria-label="Obedové menu – úvod">OBED.</a>
-      <div class="header-actions">
-        <button class="menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-label="Otvoriť navigáciu">
-          Menu <span class="menu-lines" aria-hidden="true"></span>
-        </button>
-      </div>
+      <button class="menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-label="Otvoriť navigáciu">
+        Menu <span class="menu-lines" aria-hidden="true"></span>
+      </button>
     </div>
   </header>
 
-  <div class="offcanvas offcanvas-end navigation-drawer" tabindex="-1" role="dialog" id="main-navigation" aria-labelledby="navigation-title">
+  <div class="offcanvas offcanvas-end" tabindex="-1" role="dialog" id="main-navigation" aria-labelledby="navigation-title">
     <div class="offcanvas-header">
-      <h2 id="navigation-title" class="drawer-label">Obedové menu / Navigácia</h2>
+      <h2 id="navigation-title">Obedové menu / Navigácia</h2>
       <button class="close-navigation" type="button" data-bs-dismiss="offcanvas" aria-label="Zavrieť navigáciu"><span aria-hidden="true">×</span></button>
     </div>
     <div class="offcanvas-body">
@@ -44,21 +43,21 @@
 
   <main id="main-content" class="container">
     <section class="page-intro" aria-labelledby="page-heading">
-      <div class="hero-copy">
-        <p class="eyebrow">V okolí FEI STU</p>
-        <h1 id="page-heading">Obedové<br><span>menu.</span></h1>
-      </div>
+      <p class="eyebrow">V okolí FEI STU</p>
+      <h1 id="page-heading">Obedové<br>menu.</h1>
     </section>
 
     <section id="menu" tabindex="-1" aria-labelledby="selection-heading">
       <div class="menu-controls">
         <h2 id="selection-heading">Vyberte si deň</h2>
-        <div id="day-buttons" class="day-buttons" role="group" aria-label="Deň alebo celý týždeň">
+        <div id="day-buttons" role="group" aria-label="Deň alebo celý týždeň">
           <button class="btn day-button" type="button" data-day="1" aria-pressed="false">Pondelok</button>
           <button class="btn day-button" type="button" data-day="2" aria-pressed="false">Utorok</button>
           <button class="btn day-button" type="button" data-day="3" aria-pressed="false">Streda</button>
           <button class="btn day-button" type="button" data-day="4" aria-pressed="false">Štvrtok</button>
           <button class="btn day-button" type="button" data-day="5" aria-pressed="false">Piatok</button>
+          <button class="btn day-button" type="button" data-day="6" aria-pressed="false">Sobota</button>
+          <button class="btn day-button" type="button" data-day="7" aria-pressed="false">Nedeľa</button>
           <button class="btn day-button" type="button" data-day="all" aria-pressed="false">Celý týždeň</button>
         </div>
 
@@ -66,37 +65,33 @@
           <legend>Zobraziť prevádzky</legend>
           <div class="filter-options">
             <label class="form-check">
-              <input class="form-check-input" id="filter-jedalen" name="restaurant" type="checkbox" checked>
-              <span class="form-check-label">Jedáleň</span>
-            </label>
-            <label class="form-check">
-              <input class="form-check-input" id="filter-bistro" name="restaurant" type="checkbox" checked>
-              <span class="form-check-label">Bistro</span>
-            </label>
-            <label class="form-check">
-              <input class="form-check-input" id="filter-bufet" name="restaurant" type="checkbox" checked>
-              <span class="form-check-label">Bufet</span>
+              <input class="form-check-input" id="filter-eatandmeet" name="restaurant" type="checkbox" checked>
+              <span class="form-check-label">Eat & Meet</span>
             </label>
           </div>
         </fieldset>
+        <div class="data-actions" role="group" aria-label="Správa uloženého menu">
+          <button class="btn data-button" id="refresh-menu" type="button">Aktualizovať menu</button>
+          <button class="btn data-button" id="clear-menu" type="button">Vymazať uložené dáta</button>
+        </div>
       </div>
 
-      <section id="restaurants" tabindex="-1" class="menu-results" aria-labelledby="menu-heading">
+      <section id="restaurants" tabindex="-1" aria-labelledby="menu-heading">
         <h2 id="menu-heading">Denné menu</h2>
-        <p id="menu-status" class="menu-status" role="status">Na zobrazenie menu je potrebný JavaScript.</p>
+        <p id="menu-status" role="status">Načítavam menu…</p>
         <div id="menu-list" class="row g-4"></div>
         <noscript><p class="notice">Zapnite JavaScript, aby ste mohli zobraziť menu a prepínať dni.</p></noscript>
       </section>
     </section>
 
-    <section id="about" tabindex="-1" class="about-section" aria-labelledby="about-heading">
+    <section id="about" tabindex="-1" aria-labelledby="about-heading">
       <div class="row g-4">
         <div class="col-md-4">
           <p class="eyebrow">WEBTE1 · Zadanie 02</p>
           <h2 id="about-heading">O projekte</h2>
         </div>
         <div class="col-md-8">
-          <p>Prehľad obedového menu v okolí FEI STU. Jedlá sú rozdelené podľa prevádzok a pracovných dní.</p>
+          <p>Prehľad obedového menu v okolí FEI STU. Jedlá sú rozdelené podľa prevádzok a dní v týždni.</p>
           <p class="library-note">Použité knižnice: <a href="https://getbootstrap.com/docs/5.3/">Bootstrap 5.3.8</a> – CSS pre rozloženie a prvky stránky, JavaScript pre bočnú navigáciu. Písma <a href="fonts/LICENSE.txt">Arimo</a> a <a href="fonts/BodoniModa-LICENSE.txt">Bodoni Moda</a> sú uložené lokálne.</p>
         </div>
       </div>
@@ -104,9 +99,9 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-content">
+    <div class="container">
       <p>Denys Ivanenko · WEBTE1</p>
-      <p>Obedové menu · 2026/2027</p>
+      <p>Obedové menu · 2026</p>
     </div>
   </footer>
 </body>
