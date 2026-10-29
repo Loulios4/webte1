@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiná v Bratislave</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <script src="js/parsers.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="container py-4">
+    <h1>Kiná v Bratislave</h1>
+
+    <p id="status">Programy sa načítavajú…</p>
+    <p>
+      <button id="refresh" type="button">Aktualizovať všetko</button>
+      <label><input id="use-local" type="checkbox" checked> Načítať lokálne kópie</label>
+    </p>
+
+    <div id="filters" class="mb-3"></div>
+    <div id="cards" class="row g-3"></div>
+  </main>
+</body>
+</html>
