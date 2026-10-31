@@ -18,7 +18,7 @@
   <header class="site-header">
     <div class="container">
       <p class="header-note">Obedové menu<br>V okolí FEI STU</p>
-      <a class="brand" href="index.html" aria-label="Obedové menu – úvod">OBED.</a>
+      <h1 class="brand"><a href="index.html" aria-label="Obedové menu – úvod">OBED.</a></h1>
       <button class="menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-label="Otvoriť navigáciu">
         Menu <span class="menu-lines" aria-hidden="true"></span>
       </button>
@@ -42,11 +42,6 @@
   </div>
 
   <main id="main-content" class="container">
-    <section class="page-intro" aria-labelledby="page-heading">
-      <p class="eyebrow">V okolí FEI STU</p>
-      <h1 id="page-heading">Obedové<br>menu.</h1>
-    </section>
-
     <section id="menu" tabindex="-1" aria-labelledby="selection-heading">
       <div class="menu-controls">
         <h2 id="selection-heading">Vyberte si deň</h2>
@@ -67,6 +62,14 @@
             <label class="form-check">
               <input class="form-check-input" id="filter-eatandmeet" name="restaurant" type="checkbox" checked>
               <span class="form-check-label">Eat & Meet</span>
+            </label>
+            <label class="form-check">
+              <input class="form-check-input" id="filter-fiitfood" name="restaurant" type="checkbox" checked>
+              <span class="form-check-label">FIIT FOOD</span>
+            </label>
+            <label class="form-check">
+              <input class="form-check-input" id="filter-drag" name="restaurant" type="checkbox" checked>
+              <span class="form-check-label">DRAG</span>
             </label>
           </div>
         </fieldset>
@@ -91,8 +94,9 @@
           <h2 id="about-heading">O projekte</h2>
         </div>
         <div class="col-md-8">
-          <p>Prehľad obedového menu v okolí FEI STU. Jedlá sú rozdelené podľa prevádzok a dní v týždni.</p>
-          <p class="library-note">Použité knižnice: <a href="https://getbootstrap.com/docs/5.3/">Bootstrap 5.3.8</a> – CSS pre rozloženie a prvky stránky, JavaScript pre bočnú navigáciu. Písma <a href="fonts/LICENSE.txt">Arimo</a> a <a href="fonts/BodoniModa-LICENSE.txt">Bodoni Moda</a> sú uložené lokálne.</p>
+          <p>Prehľad obedového menu v okolí FEI STU z prevádzok <a href="https://eatandmeet.sk/tyzdenne-menu">Eat & Meet</a>, <a href="http://www.freefood.sk/menu/">FIIT FOOD</a> a <a href="https://www.restauracia-drag.sk/denne-menu">DRAG</a>.</p>
+          <p>Jedálne lístky načítavame z uložených HTML stránok a spracúvame v prehliadači. Získané menu sa ukladá do localStorage a opätovne sa používa počas aktuálneho dňa.</p>
+          <p class="library-note">Použité knižnice: <a href="https://getbootstrap.com/docs/5.3/">Bootstrap 5.3.8</a> – CSS pre rozloženie a prvky stránky, JavaScript pre bočnú navigáciu. Písma <a href="fonts/Arimo-LICENSE.txt">Arimo</a> a <a href="fonts/BodoniModa-LICENSE.txt">Bodoni Moda</a> sú uložené lokálne.</p>
         </div>
       </div>
     </section>
