@@ -63,7 +63,7 @@ function loadSavedMenu(restaurant) {
 
     if (updatedAt.toDateString() !== new Date().toDateString()) {
       return null;
-    }1
+    }
 
     const valid = data.menu.every(meal =>
       meal && Number.isInteger(meal.day) && meal.day >= 1 && meal.day <= DAYS.length &&
