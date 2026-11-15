@@ -1,0 +1,640 @@
+/* ===== Colors and sizes (one place to change the look) ===== */
+:root {
+  --bg: #f3f3f1;
+  --card: #fdfdfc;
+  --ink: #1c1c1c;
+  --muted: #8a8a86;
+  --hair: #e6e6e2;
+  --radius: 22px;
+  --edge: 3px 4px 0 var(--ink); /* the thick "lip" at the bottom/right of each card */
+  --flame: #d4613a;
+  --sky: #4f7fae;
+  --leaf: #3f8a5c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Rubik, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Keyboard focus on buttons and links: blue ring */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+
+/* Text fields in focus "lift" a little and get the thick "lip" like the cards (no outline) */
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 4px 6px 0 var(--ink);
+  transform: translate(-1px, -2px);
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 760px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 32px 16px 120px; /* bottom space so the quick-add bar never covers content */
+}
+
+/* ===== Header ===== */
+.top__title {
+  margin: 0;
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ===== Card with the title sitting on its top border ===== */
+.card {
+  position: relative;
+  padding: 28px 20px 16px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--edge);
+}
+
+.card__title {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 8px;
+  background: var(--bg); /* hides the border line behind the text */
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
+  transform: translateY(-55%);
+}
+
+.card__count {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== Stat tiles (real filter buttons) ===== */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.tile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px 8px;
+  padding: 12px 14px;
+  border: 2.5px solid var(--ink);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: var(--edge);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+}
+
+/* Pressed tile sinks down onto its edge */
+.tile[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--card);
+  box-shadow: 1px 1px 0 var(--ink);
+  transform: translate(2px, 3px);
+}
+
+.tile__icon {
+  display: flex;
+}
+
+.tile--all .tile__icon {
+  color: var(--sky);
+}
+
+.tile--open .tile__icon {
+  color: var(--flame);
+}
+
+.tile--done .tile__icon {
+  color: var(--leaf);
+}
+
+.tile[aria-pressed='true'] .tile__icon {
+  color: inherit;
+}
+
+.tile__count {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: right;
+}
+
+.tile__label {
+  grid-column: 1 / -1;
+  font-weight: 700;
+}
+
+/* ===== Form fields ===== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.field__label {
+  padding-left: 14px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.field__error {
+  padding-left: 14px;
+  color: var(--flame);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px; /* pill shape */
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+textarea {
+  border-radius: 18px;
+  resize: vertical;
+}
+
+input::placeholder {
+  color: #b5b5b0;
+}
+
+[aria-invalid='true'] {
+  border-color: var(--flame);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 12px 20px;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--ink);
+  box-shadow: 2px 3px 0 #000;
+  color: #fff;
+}
+
+.btn--primary:active {
+  box-shadow: none;
+  transform: translate(2px, 3px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--ghost:hover {
+  background: var(--hair);
+}
+
+/* ===== Search + sort inside the task card ===== */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-bottom: 8px;
+}
+
+.field--inline {
+  flex: 1 1 180px;
+  margin-bottom: 0;
+}
+
+/* ===== Sort switch: one pill with two halves ===== */
+.segment {
+  display: flex;
+  padding: 3px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.segment__option {
+  position: relative;
+  flex: 1;
+}
+
+/* The real radio button is invisible but still works (click, arrow keys) */
+.segment__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.segment__option span {
+  display: block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.segment__option input:checked + span {
+  background: var(--ink);
+  color: #fff;
+}
+
+.segment__option input:focus-visible + span {
+  box-shadow: 0 0 0 3px var(--sky);
+}
+
+/* ===== Task rows ===== */
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+/* Round check button */
+.check {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-top: 1px;
+  padding: 0;
+  border: 2px solid #b9b9b4;
+  border-radius: 50%;
+  background: #fff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.check:hover {
+  border-color: var(--ink);
+}
+
+.check svg {
+  width: 16px;
+  height: 16px;
+}
+
+.row--done .check {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.row__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.row__desc {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.row__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.row__state {
+  font-weight: 700;
+}
+
+.row__state::before {
+  content: '●';
+  margin-right: 4px;
+  font-size: 0.6rem;
+  vertical-align: 2px;
+}
+
+.row__state--done {
+  color: var(--leaf);
+}
+
+.row__state--late {
+  color: var(--flame);
+}
+
+.row--done .row__title {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--hair);
+  color: var(--ink);
+}
+
+.icon-btn--danger:hover {
+  background: #fbe9e3;
+  color: var(--flame);
+}
+
+.empty {
+  margin: 8px 0;
+  padding: 28px 12px;
+  border: 2px dashed var(--hair);
+  border-radius: 16px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ===== Footer: technologies as pills ===== */
+.credits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.pill {
+  padding: 4px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pill:hover {
+  background: var(--ink);
+  color: var(--card);
+}
+
+/* ===== Quick-add bar fixed at the bottom ===== */
+.quick-add {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 12px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 14px 16px 18px;
+  /* fade from transparent to the page color, so the list "slides under" the bar */
+  background: linear-gradient(to bottom, transparent, var(--bg) 35%);
+}
+
+.quick-add__plus {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: var(--edge);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.quick-add__plus:hover {
+  background: var(--ink);
+  color: var(--card);
+}
+
+.quick-add__plus:active {
+  box-shadow: none;
+  transform: translate(3px, 4px);
+}
+
+.quick-add__input {
+  height: 52px;
+  border-width: 2.5px;
+  background: var(--card);
+  box-shadow: var(--edge);
+  font-size: 1.05rem;
+}
+/* ===== Dialog with the form ===== */
+.sheet {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  padding: 0;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--edge);
+  color: var(--ink);
+}
+
+.sheet::backdrop {
+  background: rgb(28 28 28 / 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.sheet[open] {
+  animation: pop 0.18s ease-out;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+.sheet__inner {
+  padding: 18px 22px 22px;
+}
+
+.sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sheet__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.todo-form__dates {
+  display: grid;
+  /* minmax(0, 1fr): columns may shrink below the input's natural width */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 12px;
+}
+
+.todo-form__dates input {
+  min-width: 0;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.todo-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet[open] {
+    animation: none;
+  }
+}
+
+/* ===== Phones ===== */
+@media (max-width: 560px) {
+  .shell {
+    gap: 24px;
+    padding-top: 24px;
+  }
+
+  .tiles {
+    gap: 8px;
+  }
+
+  .tile {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .tile__count {
+    font-size: 1.3rem;
+  }
+
+  .tile__label {
+    font-size: 0.8rem;
+  }
+
+  .card {
+    padding: 26px 14px 12px;
+  }
+
+  /* The dialog becomes a sheet that slides up from the bottom */
+  .sheet {
+    width: 100%;
+    max-width: 100%;
+    margin: auto 0 0;
+    border-width: 2.5px 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+    box-shadow: none;
+  }
+
+  .sheet[open] {
+    animation: slide-up 0.22s ease-out;
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+  }
+
+  .sheet__inner {
+    padding: 16px 16px 24px;
+  }
+
+  .todo-form__dates {
+    grid-template-columns: 1fr;
+  }
+
+  .todo-form__actions .btn {
+    flex: 1;
+  }
+}
