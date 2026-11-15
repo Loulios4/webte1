@@ -5,80 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WEBTE1 | Ivanenko Denys</title>
     <style>
-      * {
-        box-sizing: border-box;
-      }
-
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        font-family: Arial, sans-serif;
-        background: #f3f5f8;
-        color: #253047;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #101015 url("./webte1-background.jpg") center / cover no-repeat fixed;
       }
-
-      main {
+      .background {
+        position: fixed;
+        inset: 0;
         width: 100%;
-        max-width: 420px;
-        padding: 36px;
-        text-align: center;
-        background: #fff;
-        border: 1px solid #e0e4eb;
-        border-radius: 12px;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
       }
-
-      h1 {
-        margin: 0 0 8px;
-        font-size: 32px;
+      main {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 24px 20px max(5svh, 16px, env(safe-area-inset-bottom, 0px));
       }
-
-      p {
-        margin: 0 0 28px;
-        color: #667085;
-      }
-
       nav {
         display: flex;
-        gap: 12px;
+        gap: 16px;
+        width: min(100%, 720px);
       }
-
-      a {
+      nav a {
         flex: 1;
-        padding: 14px 20px;
-        border-radius: 7px;
-        background: #2c4f84;
-        color: #fff;
-        font-size: 18px;
-        font-weight: bold;
+        padding: 22px 12px;
+        border: 1px solid #45454d;
+        border-radius: 0;
+        background: #000;
+        color: #eeeef0;
+        text-align: center;
         text-decoration: none;
+        font-size: 24px;
+        font-weight: 700;
+        transition: border-color .15s;
       }
-
-      a:hover {
-        background: #203c66;
+      nav a:hover { border-color: #aaaab2; }
+      nav a:focus-visible { outline: 2px solid #eeeef0; outline-offset: 4px; }
+      @media (max-height: 480px) {
+        nav a { padding: 12px; font-size: 18px; }
       }
-
-      a:focus-visible {
-        outline: 3px solid #7599cc;
-        outline-offset: 3px;
-      }
-
-      @media (max-width: 400px) {
-        nav {
-          flex-direction: column;
-        }
+      @media (prefers-reduced-motion: reduce) {
+        .background { display: none; }
+        nav a { transition: none; }
       }
     </style>
   </head>
   <body>
+    <video class="background" autoplay muted loop playsinline preload="auto"
+      poster="./webte1-background.jpg">
+      <source src="./webte1-background.mp4" type="video/mp4" />
+    </video>
     <main>
-      <h1>WEBTE1</h1>
-      <p>Ivanenko Denys</p>
-      <nav aria-label="Zadania">
+      <nav>
         <a href="Z1_ivanenko/index.html">Z1</a>
         <a href="Z2_ivanenko/index.html">Z2</a>
+        <a href="Z3_ivanenko/index.html">Z3</a>
       </nav>
     </main>
   </body>
