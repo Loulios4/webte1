@@ -3,7 +3,13 @@
 export const TITLE_MAX = 200
 export const DESCRIPTION_MAX = 1000
 
-export function validateTodo(form) {
+function validLocalTime(value) {
+  const date = new Date(value)
+  // A skipped local hour during the spring clock change is normalised by Date.
+  return Number.isFinite(date.getTime()) && date.getHours() === Number(value.slice(11, 13))
+}
+
+export function validateTodo(form, from = form.dateFrom, to = form.dateTo) {
   const errors = {}
 
   if (form.title.trim() === '') {
@@ -16,13 +22,13 @@ export function validateTodo(form) {
     errors.description = `Popis môže mať najviac ${DESCRIPTION_MAX} znakov.`
   }
 
-  if (form.dateFrom === '') {
-    errors.dateFrom = 'Zadaj začiatok úlohy.'
+  if (!validLocalTime(form.dateFrom)) {
+    errors.dateFrom = 'Zadaj platný dátum a čas začiatku.'
   }
-  if (form.dateTo === '') {
-    errors.dateTo = 'Zadaj koniec úlohy.'
+  if (!validLocalTime(form.dateTo)) {
+    errors.dateTo = 'Zadaj platný dátum a čas ukončenia.'
   }
-  if (form.dateFrom !== '' && form.dateTo !== '' && new Date(form.dateFrom) > new Date(form.dateTo)) {
+  if (!errors.dateFrom && !errors.dateTo && new Date(from) > new Date(to)) {
     errors.dateTo = 'Koniec nemôže byť skôr ako začiatok.'
   }
 

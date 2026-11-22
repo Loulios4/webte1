@@ -1,5 +1,5 @@
 // SVG icons copied from https://lucide.dev/icons/ and adapted to React.
-// Original icon names: layers, flame, check, trash-2, plus, x.
+// Original icon names: layers, flame, check, plus, x.
 // Shared sizes match this app. License: public/lucide-license.txt.
 const common = {
   width: 22,
@@ -35,18 +35,6 @@ export function IconCheck() {
   return (
     <svg {...common}>
       <path d="M20 6 9 17l-5-5" />
-    </svg>
-  )
-}
-
-export function IconTrash() {
-  return (
-    <svg {...common} width={18} height={18}>
-      <path d="M10 11v6" />
-      <path d="M14 11v6" />
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-      <path d="M3 6h18" />
-      <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
     </svg>
   )
 }

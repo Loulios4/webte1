@@ -2,6 +2,7 @@
 // and shows them in the user's local time.
 
 const LOCALE = 'sk-SK'
+export const WEEKDAYS = ['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne']
 
 // "20. 11. 2026"
 export function formatDate(iso) {
@@ -23,17 +24,7 @@ export function formatInterval(fromIso, toIso) {
   return `${from} – ${formatDate(toIso)}, ${formatTime(toIso)}`
 }
 
-// Parts for the small "tear-off calendar" block: { day: 20, month: "nov" }
-export function dayAndMonth(iso) {
-  const date = new Date(iso)
-  return {
-    day: date.getDate(),
-    month: date.toLocaleDateString(LOCALE, { month: 'short' }).replace('.', ''),
-  }
-}
-
-// <input type="datetime-local"> gives local time without a zone ("2026-11-20T09:00").
-// new Date() reads it as local time, toISOString() turns it into UTC ISO 8601.
+// Convert the form value to UTC for the API.
 export function inputToIso(value) {
   return new Date(value).toISOString()
 }
@@ -42,19 +33,21 @@ export function isPast(iso) {
   return new Date(iso) < new Date()
 }
 
-// Date object -> "2026-11-20T09:00" (the format <input type="datetime-local"> needs), in local time
+// Local date and time for the form, including seconds when present.
 export function toInputValue(date) {
   const pad = (n) => String(n).padStart(2, '0')
   return (
     `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
-    `T${pad(date.getHours())}:${pad(date.getMinutes())}`
+    `T${pad(date.getHours())}:${pad(date.getMinutes())}` +
+    (date.getSeconds() || date.getMilliseconds() ? `:${pad(date.getSeconds())}` : '') +
+    (date.getMilliseconds() ? '.' + String(date.getMilliseconds()).padStart(3, '0') : '')
   )
 }
 
 // Default times for a new task: from the next full hour, 1 hour long
-export function defaultRange() {
-  const start = new Date()
-  start.setHours(start.getHours() + 1, 0, 0, 0)
+export function defaultRange(day) {
+  const start = day ? new Date(day) : new Date()
+  start.setHours(day ? 9 : start.getHours() + 1, 0, 0, 0)
   const end = new Date(start)
   end.setHours(end.getHours() + 1)
   return { dateFrom: toInputValue(start), dateTo: toInputValue(end) }

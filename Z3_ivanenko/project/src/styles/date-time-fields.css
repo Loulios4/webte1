@@ -1,0 +1,70 @@
+.datetime-trigger,
+.datetime-month button,
+.datetime-clock select {
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: white;
+  color: var(--ink);
+}
+.datetime-trigger, .datetime-month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.datetime-trigger {
+  padding: 10px 14px;
+  gap: 5px;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+.datetime-trigger[aria-invalid='true'] { border-color: var(--flame); }
+.datetime-panel {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin-bottom: 14px;
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: var(--edge);
+}
+.datetime-month { gap: 6px; }
+.datetime-month strong::first-letter { text-transform: uppercase; }
+.datetime-month button {
+  width: 34px;
+  height: 34px;
+  font-size: 1.25rem;
+}
+.datetime-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin: 10px 0;
+  text-align: center;
+}
+.datetime-days span {
+  color: var(--muted);
+  font-size: .85rem;
+}
+.datetime-days button {
+  min-height: 32px;
+  padding: 2px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+}
+.datetime-clock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid var(--hair);
+  padding-top: 10px;
+  flex-wrap: wrap;
+}
+.datetime-clock select { padding: 4px; }
+.datetime-clock .btn {
+  margin-left: auto;
+  padding: 6px 14px;
+}

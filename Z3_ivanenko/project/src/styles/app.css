@@ -1,12 +1,12 @@
-/* ===== Colors and sizes (one place to change the look) ===== */
+/* Colors and sizes */
 :root {
   --bg: #f3f3f1;
   --card: #fdfdfc;
   --ink: #1c1c1c;
-  --muted: #8a8a86;
+  --muted: #62625d;
   --hair: #e6e6e2;
   --radius: 22px;
-  --edge: 3px 4px 0 var(--ink); /* the thick "lip" at the bottom/right of each card */
+  --edge: 3px 4px 0 var(--ink);
   --flame: #d4613a;
   --sky: #4f7fae;
   --leaf: #3f8a5c;
@@ -25,6 +25,14 @@ body {
   line-height: 1.45;
 }
 
+button, input, select, textarea {
+  font: inherit;
+}
+
+button, select, .segment__option input {
+  cursor: pointer;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -33,32 +41,20 @@ body {
   clip-path: inset(50%);
 }
 
-/* Keyboard focus on buttons and links: blue ring */
-button:focus-visible,
-a:focus-visible {
-  outline: 3px solid var(--sky);
-  outline-offset: 2px;
-}
-
-/* Text fields in focus "lift" a little and get the thick "lip" like the cards (no outline) */
-input:focus,
-textarea:focus {
-  outline: none;
-  box-shadow: 4px 6px 0 var(--ink);
-  transform: translate(-1px, -2px);
-}
-
-.shell {
+.shell, .main {
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+.shell {
   max-width: 760px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 32px 16px 120px; /* bottom space so the quick-add bar never covers content */
 }
 
-/* ===== Header ===== */
+/* Header */
 .top__title {
   margin: 0;
   font-size: clamp(2.2rem, 7vw, 3.2rem);
@@ -67,21 +63,74 @@ textarea:focus {
   line-height: 1;
 }
 
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
+.main { flex: 1; }
 
-/* ===== Card with the title sitting on its top border ===== */
-.card {
-  position: relative;
-  padding: 28px 20px 16px;
-  border: 2.5px solid var(--ink);
+.top__line, .page-nav, .sync-bar, .sync-actions, .row__actions, .detail-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.login {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  width: 18rem;
+  max-width: 100%;
+  margin-left: auto;
+}
+.login input { min-width: 0; }
+.login .btn { padding: 9px 14px; }
+.page-nav {
+  gap: 6px;
+  margin-top: 20px;
+}
+.page-nav button {
+  padding: 7px 16px;
+  border: 2px solid transparent;
+  border-radius: 22px;
+  background: none;
+  font-weight: 700;
+}
+.sync-bar { font-size: .9rem; }
+.sync-actions {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+.feedback { color: var(--muted); }
+.feedback:empty { display: none; }
+.feedback--error, .text-btn.danger { color: #92351b; }
+.sheet .feedback { margin: 10px 0; }
+.text-btn {
+  border: 0;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: var(--ink);
+  background: transparent;
+  font-size: .9rem;
+  font-weight: 500;
+}
+.row__actions {
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+.about p { max-width: 65ch; }
+.about a { color: var(--ink); }
+.detail h3 { margin: 0; }
+.detail { overflow-wrap: anywhere; }
+.detail p, .row__desc { white-space: pre-line; }
+
+/* Card with the title sitting on its top border */
+.card, .sheet {
+  border: 2px solid var(--ink);
   border-radius: var(--radius);
   background: var(--card);
   box-shadow: var(--edge);
+}
+
+.card {
+  position: relative;
+  padding: 28px 20px 16px;
 }
 
 .card__title {
@@ -106,7 +155,7 @@ textarea:focus {
   font-weight: 500;
 }
 
-/* ===== Stat tiles (real filter buttons) ===== */
+/* Stat tiles */
 .tiles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -119,27 +168,11 @@ textarea:focus {
   align-items: center;
   gap: 10px 8px;
   padding: 12px 14px;
-  border: 2.5px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 18px;
   background: var(--card);
-  box-shadow: var(--edge);
   color: var(--ink);
-  font: inherit;
   text-align: left;
-  cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.tile:hover {
-  transform: translateY(-2px);
-}
-
-/* Pressed tile sinks down onto its edge */
-.tile[aria-pressed='true'] {
-  background: var(--ink);
-  color: var(--card);
-  box-shadow: 1px 1px 0 var(--ink);
-  transform: translate(2px, 3px);
 }
 
 .tile__icon {
@@ -174,7 +207,29 @@ textarea:focus {
   font-weight: 700;
 }
 
-/* ===== Form fields ===== */
+/* Form fields */
+.todo-form fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+.finish-field {
+  width: fit-content;
+  border-radius: 8px;
+  padding: 4px 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 18px;
+}
+.finish-field input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ink);
+}
+
 .field {
   display: flex;
   flex-direction: column;
@@ -182,29 +237,23 @@ textarea:focus {
   margin-bottom: 14px;
 }
 
-.field__label {
+.field__label, .field__error {
   padding-left: 14px;
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 500;
 }
 
-.field__error {
-  padding-left: 14px;
-  color: var(--flame);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
+.field__error { color: var(--flame); }
 
 input,
 textarea {
   width: 100%;
   padding: 10px 16px;
   border: 2px solid var(--ink);
-  border-radius: 999px; /* pill shape */
+  border-radius: 999px;
   background: #fff;
   color: var(--ink);
-  font: inherit;
 }
 
 textarea {
@@ -220,25 +269,12 @@ input::placeholder {
   border-color: var(--flame);
 }
 
-/* ===== Buttons ===== */
+/* Buttons */
 .btn {
   padding: 12px 20px;
-  border: 2.5px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 999px;
-  font: inherit;
   font-weight: 700;
-  cursor: pointer;
-}
-
-.btn--primary {
-  background: var(--ink);
-  box-shadow: 2px 3px 0 #000;
-  color: #fff;
-}
-
-.btn--primary:active {
-  box-shadow: none;
-  transform: translate(2px, 3px);
 }
 
 .btn--ghost {
@@ -246,11 +282,7 @@ input::placeholder {
   color: var(--ink);
 }
 
-.btn--ghost:hover {
-  background: var(--hair);
-}
-
-/* ===== Search + sort inside the task card ===== */
+/* Search + sort inside the task card */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -263,7 +295,7 @@ input::placeholder {
   margin-bottom: 0;
 }
 
-/* ===== Sort switch: one pill with two halves ===== */
+/* Sort switch: one pill with two halves */
 .segment {
   display: flex;
   padding: 3px;
@@ -281,10 +313,8 @@ input::placeholder {
 .segment__option input {
   position: absolute;
   inset: 0;
-  width: 100%;
   margin: 0;
   opacity: 0;
-  cursor: pointer;
 }
 
 .segment__option span {
@@ -294,19 +324,9 @@ input::placeholder {
   color: var(--muted);
   font-weight: 500;
   text-align: center;
-  transition: background 0.15s, color 0.15s;
 }
 
-.segment__option input:checked + span {
-  background: var(--ink);
-  color: #fff;
-}
-
-.segment__option input:focus-visible + span {
-  box-shadow: 0 0 0 3px var(--sky);
-}
-
-/* ===== Task rows ===== */
+/* Task rows */
 .rows {
   margin: 0;
   padding: 0;
@@ -326,33 +346,25 @@ input::placeholder {
   border-bottom: 0;
 }
 
-/* Round check button */
-.check {
+.check, .icon-btn, .quick-add__plus {
   display: grid;
   place-items: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.check {
   width: 26px;
   height: 26px;
   margin-top: 1px;
-  padding: 0;
   border: 2px solid #b9b9b4;
-  border-radius: 50%;
   background: #fff;
-  color: #fff;
-  cursor: pointer;
-}
-
-.check:hover {
-  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .check svg {
   width: 16px;
   height: 16px;
-}
-
-.row--done .check {
-  border-color: var(--ink);
-  background: var(--ink);
 }
 
 .row__title {
@@ -403,26 +415,11 @@ input::placeholder {
 }
 
 .icon-btn {
-  display: grid;
-  place-items: center;
   width: 34px;
   height: 34px;
-  padding: 0;
   border: 0;
-  border-radius: 50%;
   background: transparent;
   color: var(--muted);
-  cursor: pointer;
-}
-
-.icon-btn:hover {
-  background: var(--hair);
-  color: var(--ink);
-}
-
-.icon-btn--danger:hover {
-  background: #fbe9e3;
-  color: var(--flame);
 }
 
 .empty {
@@ -434,7 +431,7 @@ input::placeholder {
   text-align: center;
 }
 
-/* ===== Footer: technologies as pills ===== */
+/* Footer: technologies as pills */
 .credits {
   display: flex;
   flex-wrap: wrap;
@@ -455,12 +452,7 @@ input::placeholder {
   text-decoration: none;
 }
 
-.pill:hover {
-  background: var(--ink);
-  color: var(--card);
-}
-
-/* ===== Quick-add bar fixed at the bottom ===== */
+/* Quick-add bar fixed at the bottom */
 .quick-add {
   position: fixed;
   right: 0;
@@ -476,46 +468,25 @@ input::placeholder {
 }
 
 .quick-add__plus {
-  display: grid;
   flex-shrink: 0;
-  place-items: center;
   width: 52px;
   height: 52px;
-  padding: 0;
-  border: 2.5px solid var(--ink);
-  border-radius: 50%;
+  border: 2px solid var(--ink);
   background: var(--card);
-  box-shadow: var(--edge);
   color: var(--ink);
-  cursor: pointer;
-}
-
-.quick-add__plus:hover {
-  background: var(--ink);
-  color: var(--card);
-}
-
-.quick-add__plus:active {
-  box-shadow: none;
-  transform: translate(3px, 4px);
 }
 
 .quick-add__input {
   height: 52px;
-  border-width: 2.5px;
   background: var(--card);
-  box-shadow: var(--edge);
   font-size: 1.05rem;
 }
-/* ===== Dialog with the form ===== */
+/* Dialog with the form */
 .sheet {
-  width: min(560px, calc(100% - 32px));
+  width: calc(100% - 32px);
+  max-width: 560px;
   max-height: calc(100% - 32px);
   padding: 0;
-  border: 2.5px solid var(--ink);
-  border-radius: var(--radius);
-  background: var(--card);
-  box-shadow: var(--edge);
   color: var(--ink);
 }
 
@@ -559,12 +530,6 @@ input::placeholder {
   gap: 0 12px;
 }
 
-.todo-form__dates input {
-  min-width: 0;
-  padding-right: 12px;
-  padding-left: 12px;
-}
-
 .todo-form__actions {
   display: flex;
   justify-content: flex-end;
@@ -578,8 +543,10 @@ input::placeholder {
   }
 }
 
-/* ===== Phones ===== */
+/* Phones */
 @media (max-width: 560px) {
+  .row { grid-template-columns: auto minmax(0, 1fr); }
+  .row__actions { grid-column: 2; }
   .shell {
     gap: 24px;
     padding-top: 24px;
@@ -611,7 +578,7 @@ input::placeholder {
     width: 100%;
     max-width: 100%;
     margin: auto 0 0;
-    border-width: 2.5px 0 0;
+    border-width: 2px 0 0;
     border-radius: var(--radius) var(--radius) 0 0;
     box-shadow: none;
   }
